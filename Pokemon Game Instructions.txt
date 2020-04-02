@@ -1,0 +1,87 @@
+Hello, and welcome to the world of the Pokemon Game.
+
+Gameplay instructions:
+
+The game shows a hint at the top, and six pokeballs, each with a flashcard associated with it. There is also a pokemon in the center (chosen at random from 378 pokemon).
+Two teams take turns choosing a pokeball by using the hint and flashcard to make a sentence.
+Click on the ball to find out if you guessed right! One ball contains an O, the rest contain X.
+Collect balls by finding the right answer.
+
+If you get the answer right, the pokemon in the middle is damaged.
+If the pokemon reaches 0 HP, it is defeated and you can catch it using the balls you collected
+
+If your team guesses the ball correctly, your team earns an ultra ball.
+If the next team guesses correctly - the second ball opened - they earn a great ball.
+The rest of the guesses earn you a poke ball.
+
+If the guess is right, a new question and new flashcards are picked.
+If you fail to guess, and there is only one ball remaining, a new question and flashcards are also picked.
+
+
+The winner is the team with the most points: ultra are worth 3 points, great balls are worth 2 points, and poke balls are worth one - so if you're behind on points, an ultra answer can get you back in the game!
+
+The winning team gets to try to catch the pokemon. When the enter or return buttons are pressed on the keyboard, the ball is thrown. Just like in the game, ultra balls and great balls are both better at catching a pokemon! But also like in the game, you can run out! It IS POSSIBLE to run out of balls!
+
+Good luck on your pokemon adventure! Gotta catch them all~!
+
+
+Additional Instructions:
+
+The Excel Sheet System:
+
+The first thing that you should know: 
+The menu fits 16 items nicely. You can have more, and it'll work, but it'll look weird.
+
+The Pokemon game loads questions from excel sheets kept in the QUIZ folder. Any sheet in that folder will show up in the game.
+Create a new excel file for every book that you want to feature in the game. Name them what you like, but try to choose something less than 12 characters long though :S
+
+Inside the excel sheet, make a spreadsheet page - one for every unit. These pages may named whatever you like, and it should work.
+On each sheet, you may create a scheme to play. Follow the example sheet:
+
+You have cells labeled subset, flashcard range, question type, and custom questions.
+
+You can have as many subsets as you like. Some books have a unit split into two, teaching part of the flashcards with one sentence structure on one day, and another for the next day. This is what the subsets are made for, but you can also make your own custom ones if you like.
+
+Subsets can be named what you like and it should work. If you name them as numbers, expect to see them displayed as '1.0' in the game. That's because excel is weird.
+
+The flashcard range can either be 'all' or it can be a slice of the flashcards - 1-6 for example. It doesn't allow complicated slicing such as 1-5 and 8-10 combined. If you want to do that, consider making another subset.
+
+The question type can be 'be', 'do' or 'custom'. If the question type is 'be', you get the following hints:
+'Is he ________?'
+'Is she _______?'
+'Are you _____?'
+'Are they ____?'
+'Is Tom ______?'
+'Is Ellie ______?'
+
+If the question type is 'do', you get the following hints:
+'Does he ________?'
+'Does she _______?'
+'Do you _____?'
+'Do they ____?'
+'Does Tom ______?'
+'Does Ellie ______?'
+
+In these cases, the custom question field is ignored.
+
+If the question type is 'custom', then the game loads the questions in the question field into the game. You can have as many as you like, so long as there are no gaps, and it will randomly pick one for the hint. You can also have just one. E.G:
+'Who's this?' or 'What do you want?'
+
+
+Loading the flashcards:
+
+First thing to know:
+The game works using either JPG or PNG files. PNG files use transparency so they're better. It doesn't load any GIFs. It certainly doesn't animate them! :(
+
+
+When you choose a book and a unit in the menu in the game, the game looks for folders with the same names in the resources folder. If the names are different, it will fail. This is also case sensitive, so beware there.
+
+Subsets don't need any particular work doing regarding the flashcards, save for one thing:
+Python reads image file names a little differently to what you expect, so it's possible you have images in the folder that look like they're in the right order and then they load into the game in the wrong order. I don't know why. I'm going to include a script that will rename any images in a folder so that they're numbered '000, 001, 002' etc. Check they're in the right order after using that script, or name them yourself.
+
+
+
+
+
+
+
