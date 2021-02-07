@@ -2,7 +2,10 @@ import os
 import shutil
 import time
 
-os.chdir('.\\utilities\\imageReorderTool\\input')
+# os.chdir('.\\utilities\\imageReorderTool\\input')
+fileLoc = (os.path.dirname(os.path.abspath(__file__)))
+input_folder = os.path.join(fileLoc, 'input')
+os.chdir(input_folder)
 
 workingDirectory = os.getcwd()
 

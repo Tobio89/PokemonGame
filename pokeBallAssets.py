@@ -236,10 +236,11 @@ def getRandomPoke(pokemonList=pokemonDataSheet):
 
 
 class bonusPokemon():
-    def __init__(self, pokeImagePath, HPStat=9):
+    def __init__(self, pokeImagePath, HPStat=7):
         self.path = pokeImagePath
         self.rect = self.makeRect()
         self.__HPValue = HPStat
+        self.maxHP = HPStat
 
     @property
     def surface(self):
@@ -273,11 +274,11 @@ class bonusPokemon():
         HPSurf.blit(HPBarBkg, (39, 5))
 
         if self.HPValue > 0:
-            HPBarFill = pygame.Surface((((120 / 9) * self.HPValue) , 9))
+            HPBarFill = pygame.Surface((((120 / self.maxHP) * self.HPValue) , 9))
             color = BLACK
-            if self.HPValue >= 8:
+            if self.HPValue >= (self.maxHP//2):
                 color = GREEN
-            elif self.HPValue < 8 and self.HPValue >= 3:
+            elif self.HPValue >=(self.maxHP//3):
                 color = YELLOW
             elif self.HPValue < 3:
                 color = RED
@@ -295,8 +296,15 @@ class pokeball():
     def __init__(self, pathDict, message=None, state=None):
         self.path = pathDict
         self.__state = state
+        
+        self.surfaceWidth = 180
+        self.surfaceHeight = 90
+        self.__surface = pygame.Surface((self.surfaceWidth, self.surfaceHeight), pygame.SRCALPHA)
+
         self.__message = message
-        self.__surface = None
+
+        self.closedBall = self.drawClosedBall()
+        self.openBall = self.drawOpenBall()
         self.rect = self.makeRect()
 
         
@@ -319,35 +327,55 @@ class pokeball():
     @message.setter
     def message(self, setMessage):
         self.__message = setMessage
+        self.openBall = self.drawOpenBall()
+        self.closedBall = self.drawClosedBall()
+        
+
+
+    def drawClosedBall(self):
+        print("DEBUG: Pokeball: draw closed image")
+
+        closedBallSurf = pygame.Surface((self.surfaceWidth, self.surfaceHeight), pygame.SRCALPHA)
+        closedBallSurf.fill(CLEAR)
+
+        closedBall = self.path['closed'].copy()
+
+        closedBallRect = closedBall.get_rect()
+        closedBallRect.center = (self.surfaceWidth/2, self.surfaceHeight/2)
+        closedBallSurf.blit(closedBall, closedBallRect)
+
+        return closedBallSurf
+
+    def drawOpenBall(self):
+        print("DEBUG: Pokeball: draw open image")
+
+        openBallSurf = pygame.Surface((self.surfaceWidth, self.surfaceHeight), pygame.SRCALPHA)
+        openBallSurf.fill(CLEAR)
+
+        text = pokeBallFont.render(self.message, 1, MAINTEXTCOLOR)
+        messageRect = text.get_rect()
+        messageRect.center = (self.surfaceWidth/2, 50)
+
+        openBall = self.path['open'].copy()
+        openBallRect = openBall.get_rect()
+        openBallRect.center = (self.surfaceWidth/2, self.surfaceHeight/2)
+
+        openBallSurf.blit(openBall, openBallRect)
+        openBallSurf.blit(text, messageRect)
+
+        return openBallSurf
+
 
     @property
     def surface(self):
-        surfaceWidth = 180
-        surfaceHeight = 90
-        self.__surface = pygame.Surface((surfaceWidth, surfaceHeight), pygame.SRCALPHA)
-        self.__surface.fill(CLEAR)
 
         if self.state == 'closed':
-            closedBall = self.path['closed'].copy()
-
-            closedBallRect = closedBall.get_rect()
-            closedBallRect.center = (surfaceWidth/2, surfaceHeight/2)
-            self.__surface.blit(closedBall, closedBallRect)
-
+            # Set result to be closed surface
+            self.__surface = self.closedBall
             return self.__surface
 
         else:
-            text = pokeBallFont.render(self.message, 1, MAINTEXTCOLOR)
-            messageRect = text.get_rect()
-            messageRect.center = (surfaceWidth/2, 50)
-
-            openBall = self.path['open'].copy()
-            openBallRect = openBall.get_rect()
-            openBallRect.center = (surfaceWidth/2, surfaceHeight/2)
-
-            self.__surface.blit(openBall, openBallRect)
-            self.__surface.blit(text, messageRect)
-
+            self.__surface = self.openBall
             return self.__surface
 
 

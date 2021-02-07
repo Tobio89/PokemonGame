@@ -978,7 +978,7 @@ def catchMechanic(ballType):
 
     # print(f'Ball type {ballType}, catch chance {catchChance}.')
     
-    if catchChance > 85:
+    if catchChance > 20:
         return True, 3
     
     return False, random.randint(1, 3)
