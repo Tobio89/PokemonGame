@@ -294,11 +294,13 @@ def spinAnimation(pokeballs, locations, animationSpeed, enemyPokemon, targetSurf
            
 # Mega meta function to set out the whole game questions and flashcards
 def excelGetGameScheme(book, unit, subSet):
+    print("USING EXCELGETGAMESCHEME func")
+    
     path = r'.\quiz'
     bookPath = f'{book}.xlsx'
     excelPath = os.path.join(path, bookPath)
 
-    
+    print(f"Subset Chosen: {subSet}")
 
     wb = openpyxl.load_workbook(excelPath)
     sheet = wb[unit]
@@ -420,7 +422,7 @@ def getFlashcards(quizObject):
         print('ERROR: Failed to find the unit folder or flashcard files. Do the units in the excel file have the same name as the flashcard folders?')
     
     sessionFlashcardRange = quizObject.flashcardRange  
-    flashcardRangeTriggers = (',', ';', ':')
+    flashcardRangeTriggers = (',', ';', ':', "-")
     needToSplit = False
     triggerUsed = None
     for trigger in flashcardRangeTriggers:
@@ -432,10 +434,12 @@ def getFlashcards(quizObject):
         print('Playing with selection of flashcards')
         splitRangeIntoList = sessionFlashcardRange.split(triggerUsed)
         start = int(splitRangeIntoList[0])-1
-        if start > 0:
+        if start < 0:
             start = 0
         stop = int(splitRangeIntoList[1])
         imagePaths = imagePaths[start:stop]
+
+        print(imagePaths)
 
         
     else:

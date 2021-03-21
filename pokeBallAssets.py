@@ -333,7 +333,7 @@ class pokeball():
 
 
     def drawClosedBall(self):
-        print("DEBUG: Pokeball: draw closed image")
+        # print("DEBUG: Pokeball: draw closed image")
 
         closedBallSurf = pygame.Surface((self.surfaceWidth, self.surfaceHeight), pygame.SRCALPHA)
         closedBallSurf.fill(CLEAR)
@@ -347,7 +347,7 @@ class pokeball():
         return closedBallSurf
 
     def drawOpenBall(self):
-        print("DEBUG: Pokeball: draw open image")
+        # print("DEBUG: Pokeball: draw open image")
 
         openBallSurf = pygame.Surface((self.surfaceWidth, self.surfaceHeight), pygame.SRCALPHA)
         openBallSurf.fill(CLEAR)
@@ -685,6 +685,8 @@ class bookScheme():
 
         self.flashcardRange = flashcardRangeCell
         self.questionFormat = questionTypeCell
+
+        print(f"FLASHCARD RANGE IS {self.flashcardRange}")
 
         return flashcardRangeCell,  questionTypeCell
         
